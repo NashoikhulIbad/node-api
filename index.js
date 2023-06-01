@@ -2,14 +2,14 @@ const express = require('express');
 const mysql = require('mysql');
 
 const app = express();
-const port = 8001;
+const port = 8000;
 
 // Konfigurasi koneksi MySQL
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'cloud-api'
+  database: 'demoaws'
 });
 
 app.use((req, res, next) => {
@@ -17,19 +17,20 @@ app.use((req, res, next) => {
   next();
 });
 
-// Menghubungkan ke MySQL
+
 connection.connect((err) => {
   if (err) {
     console.error('Koneksi ke MySQL gagal: ', err);
     return;
   }
-  console.log('Terhubung ke MySQL');
+  console.log('Terhubung Ke RDS');
 });
 
-// Mengatur endpoint untuk mendapatkan data
+
 app.get('/', (req, res) => {
   // Query untuk mendapatkan data dari tabel
-  const query = 'SELECT * FROM buku';
+  const query = 'SELECT * FROM mahasiswa';
+
 
   // Eksekusi query
   connection.query(query, (err, results) => {
